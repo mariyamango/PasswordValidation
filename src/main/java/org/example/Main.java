@@ -3,13 +3,14 @@ package org.example;
 import java.security.SecureRandom;
 
 public class Main {
-    static String symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@$%^&*";
-    static SecureRandom rnd = new SecureRandom();
+    static final String ALLOWED_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@$%^&*";
+    static final int ALLOWED_MINIMUM_LENGTH = 8;
+    static SecureRandom randomSymbolPosition = new SecureRandom();
     public static void main(String[] args) {
         String randomPassword = "";
         //Here we generate the pass till it meets all the conditions
         while (!(isLengthCorrect(randomPassword)&&hasDigits(randomPassword)&&hasBothCases(randomPassword)&&isNotCommonUsed(randomPassword)&&hasSpecialCharacters(randomPassword))) {
-            randomPassword = randomPass(symbols,8);
+            randomPassword = randomPass(ALLOWED_CHARACTERS,ALLOWED_MINIMUM_LENGTH);
         }
         //And print the pass and the all the checks out.
         checkAllTheConditions(randomPassword);
@@ -35,17 +36,17 @@ public class Main {
     }
 
     //This method generates a random password
-    public static String randomPass(String symbols, int len){
-        StringBuilder pass = new StringBuilder(len);
-        for (int i = 0; i < len; i++) {
-            pass.append(symbols.charAt(rnd.nextInt(symbols.length())));
+    public static String randomPass(String symbols, int requiredLength){
+        StringBuilder resultPassword = new StringBuilder(requiredLength);
+        for (int i = 0; i < requiredLength; i++) {
+            resultPassword.append(symbols.charAt(randomSymbolPosition.nextInt(symbols.length())));
         }
-        return pass.toString();
+        return resultPassword.toString();
     }
 
     //This method checks the length
     public static boolean isLengthCorrect(String password) {
-        return password.length() >= 8;
+        return password.length() >= ALLOWED_MINIMUM_LENGTH;
     }
 
     //This method checks if pass contains digits
