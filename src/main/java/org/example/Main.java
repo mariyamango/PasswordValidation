@@ -12,20 +12,9 @@ public class Main {
         while (!(isLengthCorrect(randomPassword)&&hasDigits(randomPassword)&&hasBothCases(randomPassword)&&isNotCommonUsed(randomPassword)&&hasSpecialCharacters(randomPassword))) {
             randomPassword = randomPass(ALLOWED_CHARACTERS,ALLOWED_MINIMUM_LENGTH);
         }
-        //And print the pass and the all the checks out.
         checkAllTheConditions(randomPassword);
-
-//        System.out.println(isLengthCorrect("12345678"));
-//        System.out.println(hasDigits("jk1jlkjlkj"));
-//        System.out.println(hasBothCases("Njklkj"));
-//        System.out.println(hasBothCases("AUB&T3MWEU"));
-//        System.out.println(isNotCommonUsed("qwerty123"));
-//        System.out.println(isNotCommonUsed("GoodPassword01928374"));
-//        System.out.println(hasSpecialCharacters("sjhgdfjshdgf&skdf"));
-//        System.out.println(hasSpecialCharacters("hoiehsow,"));
     }
 
-    //This method check all the conditions and print it out.
     public static void checkAllTheConditions(String password) {
         System.out.println("The password is: "+ password +
                 "\nThe length is correct: " + isLengthCorrect(password) +
@@ -35,7 +24,6 @@ public class Main {
                 "\nPass has special characters: " + hasSpecialCharacters(password));
     }
 
-    //This method generates a random password
     public static String randomPass(String symbols, int requiredLength){
         StringBuilder resultPassword = new StringBuilder(requiredLength);
         for (int i = 0; i < requiredLength; i++) {
@@ -44,12 +32,10 @@ public class Main {
         return resultPassword.toString();
     }
 
-    //This method checks the length
     public static boolean isLengthCorrect(String password) {
         return password.length() >= ALLOWED_MINIMUM_LENGTH;
     }
 
-    //This method checks if pass contains digits
     public static boolean hasDigits(String password) {
         boolean hasDigits = false;
         for(int i = 0; i < password.length(); i++) {
@@ -61,7 +47,6 @@ public class Main {
         return hasDigits;
     }
 
-    //This method checks if the pass contains both upper and lower cases
     public static boolean hasBothCases(String password) {
         boolean hasUpperCase = false, hasLowerCase = false;
         for(int i = 0; i < password.length(); i++) {
@@ -75,7 +60,6 @@ public class Main {
         return hasUpperCase && hasLowerCase;
     }
 
-    //This method checks if the pass is not common used
     public static boolean isNotCommonUsed(String password) {
         String[] commonUsedPasses = {"Password1","Password123","Aa345678","qwerty123"};
         for(String pass : commonUsedPasses) {
@@ -86,7 +70,6 @@ public class Main {
         return true;
     }
 
-    //This method checks if the pass has special characters
     public static boolean hasSpecialCharacters(String password) {
         return !password.matches("[a-zA-Z]+");
     }
